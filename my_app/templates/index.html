@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location Access</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='location.js') }}"></script>
+</head>
+<body>
+    <h1>Location Access Example</h1>
+    <button onclick="getLocation()">Get Location</button>
+    <p id="location"></p>
+    <p id="status" style="display: none; color: green;">Location Sent Successfully!</p>
+
+</body>
+</html>
+

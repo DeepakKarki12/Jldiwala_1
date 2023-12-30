@@ -1,0 +1,100 @@
+from flask import Flask, render_template, request, jsonify, Blueprint
+from nearest import nearest_5
+import os
+import json
+# from routes import main
+# from flask_sqlalchemy import SQLAlchemy
+from flask import Blueprint, redirect, url_for
+from extension import db
+
+
+
+
+
+
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://jldi_wala_db_user:XGqqD7dHgoxsa1lGUuNFcXm8U2O1jyG2@dpg-cm80q7mn7f5s73ec0u3g-a.oregon-postgres.render.com/jldi_wala_db'
+main = Blueprint("__main__",__name__)
+# db = SQLAlchemy()
+db.init_app(app)
+
+app.register_blueprint(main)
+from model import YourModel
+
+
+
+
+
+
+    
+
+    
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/re', methods=['POST'])
+def receive_location():
+    print("hello")
+    if request.method == 'POST':
+        print("pst")
+        data = request.json  # Extract JSON data from request
+        if data:
+            latitude = data.get('latitude')
+            longitude = data.get('longitude')
+# postgresql://jldi_wala_db_user:XGqqD7dHgoxsa1lGUuNFcXm8U2O1jyG2@dpg-cm80q7mn7f5s73ec0u3g-a/jldi_wala_db
+
+            
+            print(f"Received location - Latitude: {latitude}, Longitude: {longitude}")
+
+            obj = nearest_5(latitude,longitude)
+            data = obj.main_fun()
+            for sublist in data:
+                new_entry = YourModel(column_1=sublist[0], column_2=sublist[1])
+                # Adjust column assignments based on your data structure
+                db.session.add(new_entry)
+            db.session.commit()
+            # with open('list_file.txt','w') as file:
+            #     json.dump(data,file)
+            
+
+            return jsonify({'message': 'Location received successfully'})
+
+    else:
+        print("get")
+        data = request.json
+        print(data)
+    
+    return jsonify({'message': 'Error receiving location'})
+
+
+@app.route('/final')
+def indexx():
+    all_data = YourModel.query.all()
+    final_list = []
+    
+    print("alll dataa",all_data)
+    for row in all_data:
+        row_list = []
+        print("row 1",row.column_1)
+        row_list.append(row.column_1)
+        print("row 2",row.column_2)
+        row_list.append(row.column_2)
+
+        final_list.append(row_list)
+    print("final list",final_list)
+
+    # data = [f"<li>{ user.column_1 }</li>" for user in users]
+    # print('data',data)
+    # return f"<ul>{''.join(users_list_html)}</ul>"
+    # with open('list_file.txt','r') as file:
+    #     data = json.load(file)
+    
+    # final_list = [['Perfect Bakery', 'Kaladhungi Rd, Pilikothi, Haldwani, Bomari Tallikham, Uttarakhand 263139'],['DG Cakes Arts', 'S BEND, Gas Godam Rd, Kusumkhera, Haldwani']]
+
+    return render_template('different.html',data=final_list)
+
+if __name__ == '__main__':
+    app.run(debug=True)
