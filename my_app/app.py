@@ -104,7 +104,7 @@ def indexx():
         row_list.append(row.column_2)
 
         final_list.append(row_list)
-   print("final list",final_list)
+   # print("final list",final_list)
    return render_template('different.html',data=final_list)
 from flask import jsonify
 
