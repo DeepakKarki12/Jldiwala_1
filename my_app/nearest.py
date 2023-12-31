@@ -15,7 +15,7 @@ class nearest_5:
 
     def web_driver(self):
         options = webdriver.ChromeOptions()
-        options.add_argument("--verbose")
+        # options.add_argument("--verbose")
         # options.add_argument('--no-sandbox')
         options.add_argument('--headless')
         # options.add_argument('--disable-gpu')
@@ -40,16 +40,16 @@ class nearest_5:
             input_search.send_keys(user_search)
             sleep(1)
             search_button.click()
-            sleep(3)
+            sleep(2)
             top = self.driver.find_elements('xpath',"(//span[@class='DkEaL'])")
             new_search=top[1].text
             input_search.clear()
-            sleep(2)
+            sleep(1)
             user_search = "cake shop in {x}".format(x =f"{new_search}")
             input_search.send_keys(user_search)
-            sleep(5)
+            sleep(1)
             search_button.click()
-            sleep(3)
+            sleep(2)
 
             final_info = []
 
@@ -75,7 +75,7 @@ class nearest_5:
                 sleep(3)
             return final_info
         finally:
-            self.driver.quit()
+            # self.driver.quit()
             self.driver1.quit()
 
     
