@@ -2,22 +2,11 @@ from flask import Flask, render_template, request, jsonify, Blueprint
 from nearest import nearest_5
 import os
 import json
-from geopy.geocoders import Nominatim
+# from geopy.geocoders import Nominatim
 # from routes import main
 # from flask_sqlalchemy import SQLAlchemy
 from flask import Blueprint, redirect, url_for
 from extension import db
-
-
-def get_location_details(latitude, longitude):
-    # Initialize Nominatim geocoder
-    geolocator = Nominatim(user_agent="geoapiExercises")
-
-    # Combine latitude and longitude
-    location = geolocator.reverse(f"{latitude}, {longitude}", language='en')
-
-    return location
-
 
 
 
@@ -32,13 +21,7 @@ app.register_blueprint(main)
 from model import YourModel
 
 
-
-
-
-
-    
-
-    
+   
 
 
 @app.route('/')
