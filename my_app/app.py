@@ -64,7 +64,7 @@ def receive_location():
     return jsonify({'message': 'Error receiving location'})
 
 
-@app.route('/final')
+@app.route('/mynear')
 def indexx():
     all_data = YourModel.query.all()
     final_list = []
@@ -90,7 +90,21 @@ def indexx():
 
     return render_template('different.html',data=final_list)
 
+@app.route('/alldata')
+def indexx():
+    all_data = YourModel.query.all()
+    final_list = []
+    
+    print("alll dataa",all_data)
+    for row in all_data:
+        row_list = []
+        print("row 1",row.column_1)
+        row_list.append(row.column_1)
+        print("row 2",row.column_2)
+        row_list.append(row.column_2)
 
+        final_list.append(row_list)
+    print("final list",final_list)
 from flask import jsonify
 
 @app.route('/delete')
