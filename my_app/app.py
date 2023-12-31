@@ -65,7 +65,7 @@ def receive_location():
 
 
 @app.route('/mynear')
-def indexx():
+def near():
     all_data = YourModel.query.all()
     final_list = []
     
@@ -91,7 +91,7 @@ def indexx():
     return render_template('different.html',data=final_list)
 
 @app.route('/alldata')
-def indexx():
+def all():
    all_data = YourModel.query.all()
    final_list = []
    
