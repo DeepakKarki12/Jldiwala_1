@@ -8,7 +8,7 @@ import json
 from flask import Blueprint, redirect, url_for
 from extension import db
 
-
+#1
 
 
 app = Flask(__name__)
