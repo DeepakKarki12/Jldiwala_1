@@ -2,11 +2,21 @@ from flask import Flask, render_template, request, jsonify, Blueprint
 from nearest import nearest_5
 import os
 import json
+from geopy.geocoders import Nominatim
 # from routes import main
 # from flask_sqlalchemy import SQLAlchemy
 from flask import Blueprint, redirect, url_for
 from extension import db
 
+
+def get_location_details(latitude, longitude):
+    # Initialize Nominatim geocoder
+    geolocator = Nominatim(user_agent="geoapiExercises")
+
+    # Combine latitude and longitude
+    location = geolocator.reverse(f"{latitude}, {longitude}", language='en')
+
+    return location
 
 
 
@@ -46,7 +56,8 @@ def receive_location():
             longitude = data.get('longitude')
 # postgresql://jldi_wala_db_user:XGqqD7dHgoxsa1lGUuNFcXm8U2O1jyG2@dpg-cm80q7mn7f5s73ec0u3g-a/jldi_wala_db
 
-            
+            # latitude = 28.350931
+            # longitude = 72.941597
             print(f"Received location - Latitude: {latitude}, Longitude: {longitude}")
 
             obj = nearest_5(latitude,longitude)
@@ -76,7 +87,7 @@ def indexx():
     final_list = []
     
     print("alll dataa",all_data)
-    for row in all_data:
+    for row in all_data[(len(all_data)-4):]:
         row_list = []
         print("row 1",row.column_1)
         row_list.append(row.column_1)
@@ -95,6 +106,19 @@ def indexx():
     # final_list = [['Perfect Bakery', 'Kaladhungi Rd, Pilikothi, Haldwani, Bomari Tallikham, Uttarakhand 263139'],['DG Cakes Arts', 'S BEND, Gas Godam Rd, Kusumkhera, Haldwani']]
 
     return render_template('different.html',data=final_list)
+
+
+from flask import jsonify
+
+@app.route('/delete')
+def delete_all_data():
+    try:
+        YourModel.query.delete()
+        db.session.commit()
+        return jsonify({'message': 'All tables deleted successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
