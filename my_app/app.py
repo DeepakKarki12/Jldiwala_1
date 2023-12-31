@@ -7,7 +7,7 @@ import json
 # from flask_sqlalchemy import SQLAlchemy
 from flask import Blueprint, redirect, url_for
 from extension import db
-
+from flask import jsonify
 #1
 
 
@@ -107,7 +107,23 @@ def all():
      final_list.append(row_list)
    # print("final list",final_list)
    return render_template('different.html',data=final_list)
-from flask import jsonify
+
+
+
+@app.route('/add/<user>')
+def add(user):
+    new_entry = YourModel(column_1=user, column_2="hello")
+    # Adjust column assignments based on your data structure
+    db.session.add(new_entry)
+    db.session.commit()
+    all_data = YourModel.query.all()
+    single = all_data[-1]
+    final_list = []
+    row_list = []
+    row_list.append(single.column_1)
+    row_list.append(single.column_2)    
+    final_list.append(row_list)
+    return render_template('different.html',data=final_list)
 
 @app.route('/delete')
 def delete_all_data():
