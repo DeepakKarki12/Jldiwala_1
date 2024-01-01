@@ -31,6 +31,8 @@ def index():
 
 @app.route('/test')
 def test():
+   latitude = 28.350931
+   longitude = 72.941597
    obj = nearest_5(latitude,longitude)
    print("obj ban gya")
    data = obj.test()
