@@ -43,9 +43,11 @@ def receive_location():
             # latitude = 28.350931
             # longitude = 72.941597
             print(f"Received location - Latitude: {latitude}, Longitude: {longitude}")
-
+            
             obj = nearest_5(latitude,longitude)
+            print("obj ban gya")
             data = obj.main_fun()
+            print("after calling main function")
             for sublist in data:
                 new_entry = YourModel(column_1=sublist[0], column_2=sublist[1])
                 # Adjust column assignments based on your data structure
