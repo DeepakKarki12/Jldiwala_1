@@ -6,7 +6,7 @@ from selenium import webdriver
 
 class nearest_5:
     def __init__(self,latitude,longitude):
-        self.driver = self.web_driver()
+        # self.driver = self.web_driver()
         # self.driver1 = self.web_driver()
         print("driver load")
         self.latitude = latitude
