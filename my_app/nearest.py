@@ -26,7 +26,9 @@ class nearest_5:
         # driver = webdriver.Chrome()
         return driver
 
-    
+    def test():
+        print("hello")
+        return "hello"
     def main_fun(self):
         link = "https://www.google.co.in/maps"
         self.driver.get(link)
@@ -63,7 +65,8 @@ class nearest_5:
             self.driver.quit()
             for single_link in links:
                 location_info = []
-                self.driver1.get(single_link)
+                driver1 = self.web_driver()
+                driver1.get(single_link)
                 h1=self.driver1.find_element("tag name", "h1")
                 locate = self.driver1.find_elements('xpath',"(//div[@class='Io6YTe fontBodyMedium kR99db '])")
                 location_info.append(h1.text)
@@ -77,7 +80,7 @@ class nearest_5:
             return final_info
         finally:
             # self.driver.quit()
-            self.driver1.quit()
+            driver1.quit()
 
     
 
