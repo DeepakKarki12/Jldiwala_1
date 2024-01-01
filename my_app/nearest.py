@@ -27,6 +27,8 @@ class nearest_5:
         return driver
 
     def test(self):
+        driver = self.web_driver()
+        driver.quit()
         print("hello")
         return "hello"
     def main_fun(self):
