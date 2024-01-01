@@ -7,7 +7,8 @@ from selenium import webdriver
 class nearest_5:
     def __init__(self,latitude,longitude):
         self.driver = self.web_driver()
-        self.driver1 = self.web_driver()
+        # self.driver1 = self.web_driver()
+        print("driver load")
         self.latitude = latitude
         self.longitude = longitude
         # self.latitude = 28.63388895172476 
