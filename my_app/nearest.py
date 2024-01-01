@@ -26,7 +26,7 @@ class nearest_5:
         # driver = webdriver.Chrome()
         return driver
 
-    def test():
+    def test(self):
         print("hello")
         return "hello"
     def main_fun(self):
