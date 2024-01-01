@@ -57,11 +57,11 @@ class nearest_5:
             print("top",top)
             links = []
             for i in top[0:4]:
-                location_info = []
                 single_link = i.get_attribute("href")
                 links.append(single_link)
             self.driver.quit()
             for single_link in links:
+                location_info = []
                 self.driver1.get(single_link)
                 h1=self.driver1.find_element("tag name", "h1")
                 locate = self.driver1.find_elements('xpath',"(//div[@class='Io6YTe fontBodyMedium kR99db '])")
@@ -69,7 +69,7 @@ class nearest_5:
                 # for i in locate:
                 #     location_info.append(i.text)
                 location_info.append(locate[0].text)
-                location_info.append(locate[1].text)
+                # location_info.append(locate[1].text)
                 final_info.append(location_info)
                 print(final_info)
                 sleep(3)
