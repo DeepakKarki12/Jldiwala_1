@@ -29,6 +29,14 @@ from model import YourModel
 def index():
     return render_template('index.html')
 
+@app.route('/test')
+def test():
+   obj = nearest_5(latitude,longitude)
+   print("obj ban gya")
+   data = obj.test()
+   print("data return",data)
+   return render_template('different.html')
+
 @app.route('/re', methods=['POST'])
 def receive_location():
     print("hello")
